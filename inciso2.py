@@ -19,9 +19,7 @@ def letterFreq(word):
         if letter not in freq: # Si no existe la letra
             prob[letter] = 0 # La inicializamos con cero
 
-
-    
-    # return dict(sorted(prob.items())) # Retormanos el diccionario de probabilidaes ordenado
+    return dict(sorted(prob.items())) # Retormanos el diccionario de probabilidaes ordenado
 
 
 def metrics(word):
@@ -32,19 +30,16 @@ def metrics(word):
     for key in spanishFreq:
         spanishFreq[key] = spanishFreq[key]/100 # Probabilidad
     
-    spanishFreq = dict(sorted(spanishFreq.items())) # Retormanos el diccionario de probabilidaes ordenado
-
-    print(probWord)
     for i in range(len(spanishFreq)):
         keyActual = list(spanishFreq)[i]
-        comparacion[keyActual] = abs(list(spanishFreq.values())[i]-list(probWord.values())[i])
+        comparacion[keyActual] = abs(spanishFreq[keyActual]-probWord[keyActual])
 
     sum = 0
     for key in comparacion:
         sum += comparacion[key]
 
-    return dict(sorted(comparacion.items(), key=lambda item: item[1])) # Ordeno por valor
-    # return sum
+    # Retorno la suma de todos los errores
+    return sum
 
 # casa con cesar -> FDVD
-print(metrics('FDVD')) 
+# print(metrics('FDVD')) 
