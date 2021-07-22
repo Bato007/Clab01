@@ -14,11 +14,7 @@ def mod_inv(x, y):  # Funcion que calcula el inverso modular
 
 def clean(text):    # Funcion que convierte a mayuscula y quita tildes
     cleaned = text.upper()
-    cleaned = cleaned.replace('Á', 'A')
-    cleaned = cleaned.replace('É', 'E')
-    cleaned = cleaned.replace('Í', 'I')
-    cleaned = cleaned.replace('Ó', 'O')
-    cleaned = cleaned.replace('Ú', 'U')
+    cleaned = cleaned.replace(' ', '')
     return cleaned
 
 
@@ -78,10 +74,10 @@ def Cviginere(key, text):  # Cifrado viginere se le manda la llave y texto
     for letter in text:  # Por cada letra
         x = l_association.get(letter)       # Se obtiene el valor de la letra
         k = l_association.get(key[index])   # Se obtiene el valor de la k
+
         if ((x is None) or (k is None)):
             cripted_text += letter
         else:
-            k += 1
             new = (x + k) % length  # Se convierte el indice
             cripted_letter = n_association.get(new)  # Se obtiene la letra
             cripted_text += cripted_letter
@@ -101,8 +97,11 @@ def Dviginere(key, text):  # Cifrado viginere se le manda la llave y texto
         if ((x is None) or (k is None)):
             cripted_text += letter
         else:
-            k += 1
-            new = (x - k) % length  # Se convierte el indice
+
+            if (x - k) >= 0:
+                new = (x - k) % length  # Se convierte el indice
+            else:
+                new = (x - k + length) % length
             cripted_letter = n_association.get(new)  # Se obtiene la letra
             cripted_text += cripted_letter
         index = (index + 1) % len(key)

@@ -1,5 +1,5 @@
 from itertools import product
-from encryption import Ccesar, Dafin, Dviginere
+from encryption import Ccesar, Cafin, Cviginere, Dviginere
 from inciso2 import metrics
 from pprint import pprint
 
@@ -7,26 +7,31 @@ spanish = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
 alphabet = {i: spanish.index(i) for i in spanish}
 length = len(alphabet)
 
+cipher1 = 'WDSFSDALALIHKXKWUNWFUASLISKSVWLUAXKSKUKAIMHYKSESLLWTSLSWFWLMNVASKDSXKWUNWFUASUHFDSJNWSISKWUWFDHLVALMAFMHLLAETHDHLWFNFDWFYNSBWVWMWKEAFSVHQDNWYHWLMNVASKDSXKWUNWFUASUHFDSJNWSISKWUWFWFDHLUKAIMHYKSESLQVWWLMSESFWKSWLMSTDWUWKNFSKWDSUAHFQHTMWFWKWDMWPMHIDSFHDSAVWSXNFVSEWFMSDWLJNWFHMHVSLDSLDWMKSLSISKWUWFUHFDSEALESXKWUNWFUASWFDHLMWPMHLLAFHJNWSDYNFSLSISKWUWFESLSEWFNVHJNWHMKSLUHFMSFVHDSLLAYFHLVWDMWPMHUAXKSVHQHKVWFSFVHDHLVWESQHKSEWFHKXKWUNWFUASIHVWEHLWLMSTDWUWKUHFBWMNKSLSUWKUSVWJNWDWMKSUHKKWLIHFVWSUSVSLAYFHWDSFSDALALLWUHEIDWMSUHFDSTNLJNWVSVWISDSTKSLXKWUNWFMWLUHEHSKMAUNDHLQIKWIHLAUAHFWLLASVWESLUHFHUWEHLHLHLIWUZSEHLVWSDYNFSISDSTKSJNWVWTSSISKWUWKWFWDEWFLSBWEWBHKJNWEWBHKWDKWLMHWLUNWLMAHFVWAFMNAUAHFLWYNFNFWLMNVAHLHTKWMWPMHLVWDVASKAHWDISALVWWFKAJNWXHFMSFADDHDSENWLMKSMHESVSVLHFDHLWBWEIDSKWLVWVAUZHVASKAHINTDAUSVHLVNKSFMWNFSLWESFSUAFUNWFMSQVHLEADLWALUAWFMHLVAWUAFNWÑWDWMKSLWFMHMSDDSXKWUNWFUASVWDSLDWMKSLWFUSLMWDDSFHWLSIKHPAESVSEWFMWDSJNWLAYNW'
+cipher2 = 'QHNHVPEKHVHVRRMIRYERARMTECJZRVRYEQCBHIRPPCLBRJRQHRPBXERPIBCJIRPJHZCBJHQQHHEPBPHVRKEHIRNHQHRQHACBJTERIPHYBEJQBIRVRIPRMZCRJIHMVCRLNCQVBMCMVRAHZEJHMXEIJCUATERMRPACPHJXHPHZBJICJEHPZBJRQXQHJJHZCBJHQVRAHZEJHZCBJZBJIPHRQZBPBJHACPEMBPCKCJHQNRJIRRQHACBJCDHHHIRPPCLHPRJKEHIRNHQHRQNCRPZBQRMHQHMACRCJICEJHGBPHMXRPBQERKBMRCJÑBPNBTERRQAERQBMRGHDCHPRIPHMHVBOXBPRMBQQRKBHQXHCMHRMBVRQHMZEHIPBGBPHMVRRMIRYERARMRQNCJCMIRPCBVRMHQEVCJÑBPNBTERRQHACBJIPHYBIPRMZCRJIHMVCRLNCQVBMCMVRQDCBQBKCZBPEMBVRQHMZEHQRMMRMRJIHNCQMBJMRKEJVHMVBMCMOVBMZCRJIBMZCJZERJIHNCQXPCNRPHMVBMCMHVCÑRPRJZCHVRBIPHMAHZEJHMRQDCBQBKCZBVRPEMCHICRJRVBMZBNXBJRJIRMEJBTERMREICQCLHXHPHQHXPCNRPHVBMCMOBIPBXHPHRQPRÑERPLBORMIRZHPKHNRJIBVRMRMRJIHNCQMCKJCÑCZHPCHRQXPCNRPBTERPRZCDRRQXHCMVRMRKEJVHMVBMCMZBJRMIHMVBMCMMRZBJICJEHPHZBJRQXQHJJHZCBJHQVRAHZEJHZCBJOMRCJCZCHPHZBJQHHVNCJCMIPHZCBJVRQHMMRKEJVHMVBMCMZEHJVBQHMXPCNRPHMXRPMBJHMCJNEJCLHVHMZBJMXEIJCUAZENXQHJMEMJBARJIHVCHMVRGHDRPPRZCDCVBQHXPCNRPHVBMCMZCIHQHCJÑBPNHZCBJVRQNCJCMIRPCBVRMHQEV'
+cipher3 = 'DYEFESJKBCFSSXSDPPISSVERPOELFWMFUMSIFVHAESEUFTXHRYIQBQEVBTSVSMELBOZSSOSDBWIDWETHEIVHTEHWHYEMFPEDBOSZBFMSBTVWTEHHJPTDBGETMICVFJMFJXMÑBEQMFWYAHQSKBQGABXSIPKVSGMGSTIWWÑXSUPQXKBQUNJOMVBHEWTTIKBVOSNYIKUIUNJWSEPVMKBOOATMQFJQKNÑEILQIVSÑDESJWOSESGHÑIOIFQWSNMIFUSJAKSIFMEILQERSEMWMBQXWQEVMJGYDBVPWÑXIWÑIOUPQZWÑXSVFOSLBFVHKSWVPQHWDEVDPWUNJQXHDSQVFWGWÑHMWSEYFBZIRBFEBBVHWTYIEJQIFDMEIBVEVFGMKMIUNFGSFGMETBIQWMGIDPVIDJKMHTSHWTYOSCSVKFHIFUSVSBOHWTTIKUEVLFIQUPQXKPVSVFEHHQSVNÑKVNQSHWJQHAHIQSTHIKPWXKPMPIBWMTMIUNFWIVJWTHÑMEFBWEUSMJADEVDPEQMFYQSMXEKVQEDUEVJVIETBVXHMSPWMITSSIGAPGSEPIODFGLHFQUNFHILDEQLBVMSBOJAÑHILVWXWNSVWTHILVHILUMQHEIWANMWEPXVWTERHTIQWMTEATOIZBFMSÑGSFGIVAESYFNIHABQSVPPMFJSHWMEWDFQKNBWQSUMZSTMQMFQXHBOKHEMNHBOKNÑEWIBOETSEWJVIJNFVSFDSPISIQVJHELFQXHÑGILGOSKFGMHFQIDVQEAEIEJVIXNWSTHSHMYÑEHWTYXSMIQMPCHWTYGNMXYKBYQAWIVLBOCVFWYSSHYHDSQHDMPAFQXHEIEKJWXHUIOWTVIUPVHHRYIIBVEWTIHABWIWTTIKBFENÑIGDJTWWUSXSMHILPOCVJWTNTSIFMSPSTMQMJPSÑBOIKTIHWBUYWMGSFPGMEJIQMPTEKBIQYBREKBWYLPTVWTSVWTCWSMZEKMEZAEEWANIPSUEMLMIWVJNSIVIHHIEGWSUYWFOWHMWIHTGYKFDGSFQWNBOXNSEOHTMQVJKIFBWOHNMVSSSQXJNEEFQXWZFEKUSOHNIWHSTVWÑHMHMEMFDVIVVOMVBHIFTYWHKSWÑJSUNFWIISSHNKSYFQIUNFRSUPQWWKSCWTTIKPGSFGMEVPQSLJQGAFVXHEIWVFQHHTLSKBWHWTTYWTIOUPVERPQHWGVEQCEVMPOSEFEVKBDSDBGLHSVISCEWNTEQYSIZWIIPWÑXILPFVWMETAFHVSEIOHTWEUSMJADMSLCVMDMEQMFFEBPOEHQEGSMYDVFYQLPOIUMMTLBHSEJIQMSEWNÑSHWMSWAÑHMYFQELSIGAUEFSTMQFJQKNÑEMFGOIPJSQVFZSRTMQISMWSVQEIPVYFBOELJQJAÑMXSTJIUIEWWÑUYWTITKPHYUJVMSÑIGDJTWWTWSDBVILZOYFBVILRYIDPWELUVSFPPSLEIOSDSPNÑMHSEPEQBLETJEQISIZATXSQBQSMBHSWÑWYLDSHADIWLJQOSWEOAPWESZYHSEIEKJWXHUIOWT'
 
-def bruteCesar(text):
+
+def bruteCesar(text):  # 8
     keys = {}
     for key in range(length):
         decrypted = Ccesar(text, key)   # Se decripta
         error = metrics(decrypted)      # Se obtiene el error
         keys[key] = error               # Se guarda
+    keys = dict(sorted(keys.items(), key=lambda item: item[1]))  # Se ordenan
 
-    pprint(keys)
-    decrypted = Ccesar(text, 8)
-    print(decrypted)
     # Se obtienen top 5 de llaves
     k_proposal = list(keys.keys())[:5]
-    # for key in k_proposal:
-    #     decrypted = Dcesar(text, key)
-    #     print(decrypted)
-    #     input(('Llave:', key, 'Enter'))
+    for key in k_proposal:
+        decrypted = Ccesar(text, key)
+        print(decrypted)
+        result = input(('Llave:', key, options[key], 'Enter o done'))
+
+        if result == 'done':
+            return (key, decrypted)
 
 
-def bruteAfin(text):
+def bruteAfin(text):  # 20 22
     results = {}
 
     for i in range(length):
@@ -34,31 +39,58 @@ def bruteAfin(text):
             continue
 
         for j in range(length):
-            decrypted = Dafin(i, j, text)
+            decrypted = Cafin(i, j, text)
             error = metrics(decrypted)
             results[(i, j)] = error
 
     keys = dict(sorted(results.items(), key=lambda item: item[1]))
     k_proposal = list(keys.keys())[:5]
-    print(k_proposal)
     for key in k_proposal:
-        # decrypted = Dafin(key[0], key[1], text)
-        print(results[key])
-        input(('Llave:', key, 'Enter'))
+        decrypted = Cafin(key[0], key[1], text)
+        print(decrypted)
+        result = input(('Llave:', key, options[key], 'Enter o done'))
+
+        if result == 'done':
+            return (key, decrypted)
 
 
 def bruteViginere(text):
     options = {}
-    for i in range(1, 3):
+    # Se intento con las de 1 y 2, luego de 3 y 4
+    for i in range(1, 6):
+        # Se obtienen las combinaciones
         combinations = [''.join(j) for j in product(spanish, repeat=i)]
-        for k in combinations:
-            decrypted = Dviginere(k, text)
+        for k in combinations:  # Por cada convinacion se intenta
+            decrypted = Dviginere(k, text)  # Se decripta
             error = metrics(decrypted)      # Se obtiene el error
 
-            # Se compara con el top 50
-        print(combinations)
+            if (error < 500):
+                options[k] = error              # Se obtiene el error
 
+                # Se obtiene el top 100
+                if len(options) > 1000:
+                    # Se ordenan
+                    options = dict(
+                        sorted(options.items(), key=lambda item: item[1]))
+                    keys = list(options.keys())
+                    for i in range(100, len(keys)):
+                        options.pop(keys[i])
 
-f = open('cipher1.txt', 'r')
-cipher = f.read()
-bruteCesar(cipher)
+    options = dict(sorted(options.items(), key=lambda item: item[1]))
+    k_proposal = list(options.keys())[:10]
+
+    for key in k_proposal:  # Se obtienen las propuestas
+        if options[key] < 50:   # Si no hay tanto error se mira que pedo
+            decrypted = Dviginere(key, text)
+            print(decrypted)
+            result = input(
+                ('Llave Tentativa:', key, options[key], 'Enter o done'))
+
+            if result == 'done':
+                return (key, decrypted)
+        else:
+            print('No es llaver error arriba del 50:', key, options[key])
+
+bruteCesar(cipher1)
+bruteAfin(cipher2)
+bruteViginere(cipher3)
